@@ -91,7 +91,7 @@ class ${class_name}(gr.top_block, Qt.QWidget):
 % elif generate_options == 'bokeh_gui':
 
 class ${class_name}(gr.top_block):
-    def __init__(self):
+    def __init__(${param_str}):
         gr.top_block.__init__(self, "${title}", catch_exceptions=${catch_exceptions})
         self.plot_lst = []
         self.widget_lst = []
@@ -373,7 +373,7 @@ def main(top_block_cls=${class_name}, options=None):
     qapp.exec_()
     % elif generate_options == 'bokeh_gui':
     # Create Top Block instance
-    tb = top_block_cls()
+    tb = top_block_cls(${ ', '.join(params_eq_list) })
     ${'snippets_main_after_init(tb)' if snippets['main_after_init'] else ''}
     try:
         tb.start()
